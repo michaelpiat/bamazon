@@ -70,7 +70,8 @@ function start() {
 						}
 					],
 					console.log("Your total is: $"+purchaseTotal+"\n"+"Thank you for shopping with us, please visit again soon!")
-					prompt,inquirer([
+				)
+				inquirer.prompt([
 						{
 							name:"buyMore",
 							type:"confirm",
@@ -78,14 +79,13 @@ function start() {
 						}
 
 					]).then(function(answer){
-						if(answer === true){
+						if(answer.buyMore === true) {
 							start();
 						}
 						else {
 							process.exit();
 						}
-					});
-				);
+					})
 			}
 
 		});
