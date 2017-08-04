@@ -32,7 +32,7 @@ function manager(){
     			case "Add to Inventory":
       				addInventory();
       				break;
-      			case "/frameworks":
+      			case "Add New Product":
       				addProduct();
       				break;  				
   			}
@@ -112,4 +112,50 @@ function addInventory(){
 		
 		});
 		
+}
+
+function addProduct() {
+
+	inquirer.prompt([
+		{
+			name:"product",
+			type:"text",
+			message:"What is the name of the product?"
+		},
+		{
+			name:"department",
+			type:"text",
+			message:"What department?"
+		},
+		{
+			name:"price",
+			type:"text",
+			message:"What is the price?",
+			validate: function(value){
+				return (!isNaN(value) && parseFloat(value) > 0)
+			}
+		},
+		{
+			name:"stock",
+			type:"text",
+			message:"How much is in stock?",
+			validate: function(value){
+				return (!isNaN(value) && parseInt(value) > 0)
+			}
+		}
+	]).then(function(answer){
+		connection.query(
+			"INSERT INTO products SET ?",
+			{
+				product_name: answer.product,
+				department_name: answer.department,
+				price: parseFloat(answer.price),
+				stock_quantity: parseInt(answer.stock)
+			},
+			function(err, res) {
+				if (err) throw err;
+				console.log("New product added");
+			}
+		);
+	})
 }
