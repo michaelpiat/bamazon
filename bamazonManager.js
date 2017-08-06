@@ -47,6 +47,7 @@ function forSale(){
 				+"\n"+"Department: "+res[i].department_name+"\n"+"Price: $"+res[i].price+"\n"+"Quantity avilable: "+res[i].stock_quantity);
 			console.log("---------------");
 		}
+		process.exit();
 	});		
 }
 
@@ -55,6 +56,7 @@ function inventory(){
 
 		if(res.length === 0){
 			console.log("No low inventory");
+			process.exit();
 		}
 		else {
 			for (var i=0; i < res.length; i++) {
@@ -63,7 +65,8 @@ function inventory(){
 						+"\n"+"Department: "+res[i].department_name+"\n"+"Price: $"+res[i].price+"\n"+"Quantity avilable: "+res[i].stock_quantity);
 					console.log("---------------");
 			}
-		}	
+		}
+		process.exit();	
 	})
 }
 
@@ -106,6 +109,7 @@ function addInventory(){
 						if (err) throw err;
 
 						console.log("Inventory added!");
+						process.exit();
 					})
 				}
 			})
@@ -155,6 +159,7 @@ function addProduct() {
 			function(err, res) {
 				if (err) throw err;
 				console.log("New product added");
+				process.exit();
 			}
 		);
 	})
